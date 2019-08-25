@@ -5,6 +5,7 @@
  */
 package com.bs.consultationsserver.model;
 
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,9 +46,19 @@ public class User {
     @NotNull
     private char[] password;
     @OneToMany(mappedBy = "sender", fetch = FetchType.EAGER)
-    private Set<Message> sentMessages;
+    private List<Message> sentMessages;
     @OneToMany(mappedBy = "reciever", fetch = FetchType.EAGER)
-    private Set<Message> recievedMessages;
+    private List<Message> recievedMessages;
+
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String email, char[] password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
 
     public Long getUserId() {
         return userId;
