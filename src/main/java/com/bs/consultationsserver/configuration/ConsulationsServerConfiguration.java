@@ -5,9 +5,12 @@
  */
 package com.bs.consultationsserver.configuration;
 
+import com.bs.consultationsserver.service.ListenerService;
 import com.bs.consultationsserver.service.RecieverService;
+import com.bs.consultationsserver.service.SenderService;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +22,21 @@ import org.springframework.context.annotation.Configuration;
 public class ConsulationsServerConfiguration {
     
 //    @Bean
-//    public RecieverService recieverService() throws IOException, TimeoutException {
-//        return new RecieverService();
+//    public Queue server() {
+//        return new Queue("server");
 //    }
+    
+//    @Bean Queue queue_1() {
+//        return new Queue("queue_1", false);
+//    }
+    
+    @Bean
+    public SenderService senderService() {
+        return new SenderService();
+    }
+    
+    @Bean
+    public ListenerService listenerService() {
+        return new ListenerService();
+    }
 }

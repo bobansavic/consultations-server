@@ -32,18 +32,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private String firstName;
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private String lastName;
-    @NotNull
-    @NotBlank
-    @Email
+//    @NotNull
+//    @NotBlank
+//    @Email
     @Column(unique = true)
     private String email;
-    @NotNull
+//    @NotNull
     private char[] password;
     @OneToMany(mappedBy = "sender", fetch = FetchType.EAGER)
     private List<Message> sentMessages;
