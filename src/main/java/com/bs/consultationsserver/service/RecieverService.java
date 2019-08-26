@@ -32,10 +32,10 @@ import org.springframework.stereotype.Service;
  *
  * @author Boban
  */
-@Service
+//@Service
 public class RecieverService {
 
-    private static final String ACTION_CODE_0 = "ACTION_CODE_0";
+    /*private static final String ACTION_CODE_0 = "ACTION_CODE_0";
     private static final String ACTION_CODE_1 = "ACTION_CODE_1";
     private final String QUEUE_1 = "queue_1";
 
@@ -64,7 +64,7 @@ public class RecieverService {
                     AMQP.BasicProperties properties, byte[] body)
                     throws IOException {
 
-                /*ByteArrayInputStream bis = new ByteArrayInputStream(body);
+                *//*ByteArrayInputStream bis = new ByteArrayInputStream(body);
                 ObjectInput in = null;
 
                 try {
@@ -114,7 +114,7 @@ public class RecieverService {
                     } catch (IOException ex) {
                         Logger.getLogger(RecieverService.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }*/
+                }*//*
                 ObjectMapper mapper = new ObjectMapper();
 
                 try {
@@ -151,5 +151,5 @@ public class RecieverService {
             }
         };
         channel.basicConsume(QUEUE_IDENT, true, consumer);
-    }
+    }*/
 }
