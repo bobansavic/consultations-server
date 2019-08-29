@@ -30,9 +30,9 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long messageId;
-//    @NotNull
+    @NotNull
     private String text;
-//    @NotNull
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
     @ManyToOne(fetch = FetchType.EAGER, optional = false) // could be LAZY

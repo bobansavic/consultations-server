@@ -21,15 +21,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConsulationsServerConfiguration {
     
-//    @Bean
-//    public Queue server() {
-//        return new Queue("server");
-//    }
-    
-//    @Bean Queue queue_1() {
-//        return new Queue("queue_1", false);
-//    }
-    
     @Bean
     public SenderService senderService() {
         return new SenderService();

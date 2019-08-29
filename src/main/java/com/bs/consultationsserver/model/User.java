@@ -32,19 +32,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-//    @NotNull
-//    @NotBlank
+    @NotNull
+    @NotBlank
     private String firstName;
-//    @NotNull
-//    @NotBlank
+    @NotNull
+    @NotBlank
     private String lastName;
-//    @NotNull
-//    @NotBlank
-//    @Email
+    @NotNull
+    @NotBlank
+    @Email
     @Column(unique = true)
     private String email;
-//    @NotNull
+    @NotNull
     private char[] password;
+    private String uniqueIdentifier;
     @OneToMany(mappedBy = "sender", fetch = FetchType.EAGER)
     private List<Message> sentMessages;
     @OneToMany(mappedBy = "reciever", fetch = FetchType.EAGER)
@@ -98,5 +99,13 @@ public class User {
 
     public void setPassword(char[] password) {
         this.password = password;
+    }
+    
+    public String getUniqueIdentifier() {
+        return uniqueIdentifier;
+    }
+
+    public void setUniqueIdentifier(String uniqueIdentifier) {
+        this.uniqueIdentifier = uniqueIdentifier;
     }
 }

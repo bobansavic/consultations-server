@@ -47,23 +47,25 @@ public class UserService {
         return userRepository.save(user);
     }
     
-    public boolean loginValidation(String email, char[] password) {
+    public User loginValidation(String email, char[] password) {
         try {
             User loginUser = findByEmail(email);
             if (loginUser != null) {
                 System.out.println("User found! [" + email + "]");
                 if (Arrays.equals(password, loginUser.getPassword())) {
                     System.out.println("Password match! Login success! [" + email + "]");
-                    return true;
+                    return loginUser;
                 } else {
                     System.out.println("Incorrect password! [" + email + "]");
-                    return false;
+                    return null;
                 }
+            } else {
+                System.out.println("User not found! [" + email + "]");
+                return null;
             }
-            return false;
-        } catch (Exception e) {
-            System.out.println("Authentication failed: " + e);
-            return false;
+        } catch (Exception ex) {
+            System.out.println("Authentication failed: " + ex);
+            return null;
         }
     }
 }
