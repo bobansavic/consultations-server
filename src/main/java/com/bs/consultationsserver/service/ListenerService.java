@@ -23,12 +23,14 @@ public class ListenerService {
     private static final String ACTION_CODE_2 = "ACTION_CODE_2";
     private static final String ACTION_CODE_3 = "ACTION_CODE_3";
     private final String QUEUE_1 = "queue_1";
-    
+
+    @Autowired
+    private MessageService messageService;
     @Autowired
     private SenderService senderService;
     @Autowired
     private UserService userService;
-    
+
     private String firstName;
     private String lastName;
     private String email;
@@ -85,7 +87,11 @@ public class ListenerService {
                 
                 if (loginUser != null) {
                     rabbitMessageOut.setActionCode(ACTION_CODE_1_1);
+                    rabbitMessageOut.setUserId(loginUser.getUserId());
+                    rabbitMessageOut.setFirstName(loginUser.getFirstName());
+                    rabbitMessageOut.setLastName(loginUser.getLastName());
                     rabbitMessageOut.setUniqueIdentifier(loginUser.getUniqueIdentifier());
+                    rabbitMessageOut.setClientMessages(messageService.getClientMessages(loginUser.getUserId()));
                 } else {
                     rabbitMessageOut.setActionCode(ACTION_CODE_1_0);
                 }
@@ -98,7 +104,7 @@ public class ListenerService {
                     Logger.getLogger(ListenerService.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.out.println(jsonPayload);
-                senderService.send("queue_1", jsonPayload.getBytes());
+                senderService.send(rabbitMessageIn.getReturnQueueId(), jsonPayload.getBytes());
                 System.out.println("Message sent1");
                 break;
             

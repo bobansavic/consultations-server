@@ -21,4 +21,5 @@ public interface MessageRepository extends CrudRepository<Message, Long>{
     List<Message> findAllBySender(User sender);
     @Query("FROM Message WHERE (sender_id=:userId1 OR reciever_id=:userId1) AND (sender_id=:userId2 OR reciever_id=:userId2) ORDER BY timestamp ASC")
     List<Message> findAllBySenderIdOrRecieverIdOrderByTimestamp(Long userId1, Long userId2);
+    List<Message> findAllBySenderIdOrRecieverId(Long userId);
 }
