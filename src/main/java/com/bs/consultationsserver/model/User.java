@@ -61,6 +61,14 @@ public class User {
         this.password = password;
     }
 
+    public User(String firstName, String lastName, String email, char[] password, String uniqueIdentifier) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.uniqueIdentifier = uniqueIdentifier;
+    }
+
     public Long getUserId() {
         return userId;
     }

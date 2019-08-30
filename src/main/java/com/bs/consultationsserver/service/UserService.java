@@ -73,6 +73,7 @@ public class UserService {
         return new UserDto(user.getUserId(), user.getFirstName(), user.getLastName(),
             user.getEmail(), user.getUniqueIdentifier());
     }
+
     public List<Message> getSentMessagesForUser(User user) {
         return messageService.findAllBySender(user);
     }

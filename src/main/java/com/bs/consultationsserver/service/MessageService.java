@@ -36,6 +36,15 @@ public class MessageService {
     public Message saveMessage(Message message) {
         return messageRepository.save(message);
     }
+
+    public Message saveMessage(MessageDto messageDto) {
+      Message newMessage = new Message();
+      newMessage.setReciever(userService.findByEmail(messageDto.getReceiver().getEmail()));
+      newMessage.setSender(userService.findByEmail(messageDto.getSender().getEmail()));
+      newMessage.setText(messageDto.getTextMessage());
+      newMessage.setTimestamp(messageDto.getTimestamp());
+      return saveMessage(newMessage);
+    }
     
     public List<Message> saveMessages(Set<Message> messages) {
         Iterable<Message> savedMessages = messageRepository.saveAll(messages);
@@ -49,7 +58,7 @@ public class MessageService {
     public List<Message> findAllBySender(User sender) {
         return messageRepository.findAllBySender(sender);
     }
-    
+
     public List<Message> findAllForUsers(Long userId1, Long userId2) {
         return messageRepository.findAllBySenderIdOrRecieverIdOrderByTimestamp(userId1, userId2);
     }
@@ -68,7 +77,7 @@ public class MessageService {
 
             for (Message msg : allMessages) {
                 MessageDto messageDto = new MessageDto();
-                messageDto.setReciever(userService.createDtoFromUser(msg.getReciever()));
+                messageDto.setReceiver(userService.createDtoFromUser(msg.getReciever()));
                 messageDto.setSender(userService.createDtoFromUser(msg.getSender()));
                 messageDto.setTextMessage(msg.getText());
                 messageDto.setTimestamp(msg.getTimestamp());

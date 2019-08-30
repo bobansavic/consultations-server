@@ -1,5 +1,6 @@
 package com.bs.consultationsserver.service;
 
+import com.bs.consultationsserver.model.MessageDto;
 import com.bs.consultationsserver.model.RabbitMqMessage;
 import com.bs.consultationsserver.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,6 +23,12 @@ public class ListenerService {
     private static final String ACTION_CODE_1_1 = "ACTION_CODE_1_1";
     private static final String ACTION_CODE_2 = "ACTION_CODE_2";
     private static final String ACTION_CODE_3 = "ACTION_CODE_3";
+    private static final String ACTION_CODE_5 = "ACTION_CODE_5";
+    private static final String ACTION_CODE_5_0 = "ACTION_CODE_5_0";
+    private static final String ACTION_CODE_5_1 = "ACTION_CODE_5_1";
+    private static final String ACTION_CODE_6 = "ACTION_CODE_6";
+    private static final String ACTION_CODE_6_0 = "ACTION_CODE_6_0";
+    private static final String ACTION_CODE_6_1 = "ACTION_CODE_6_1";
     private final String QUEUE_1 = "queue_1";
 
     @Autowired
@@ -110,6 +117,17 @@ public class ListenerService {
             
             case ACTION_CODE_3:
                 System.out.println("REGISTRATION ATTEMPT DETECTED!");
+                break;
+            case ACTION_CODE_5:
+                MessageDto chatMessage = rabbitMessageIn.getChatMessage();
+                System.out.println(
+                    "Chat message sent from client:\n" + rabbitMessageIn.getReturnQueueId()
+                    + " (" + chatMessage.getSender().getEmail() + ")\nto client:\n"
+                    + chatMessage.getReceiver().getUniqueIdentifier() + " ("
+                    + chatMessage.getReceiver().getEmail() + ")"
+                );
+                senderService.forwardChatMessage(chatMessage);
+                messageService.saveMessage(chatMessage);
                 break;
             default:
                 System.out.println("RabbitMqMessage recieved!");
